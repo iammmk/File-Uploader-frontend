@@ -10,6 +10,7 @@ const Nav = () => {
       <AppBar position="static">
         <Toolbar>
           <Box display="flex" alignItems="center">
+            {/* app icon */}
             <IconButton
               size="large"
               edge="start"
@@ -19,6 +20,7 @@ const Nav = () => {
             >
               <CloudUploadIcon />
             </IconButton>
+            {/* app title */}
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               <span onClick={() => history("/")} style={{ cursor: "pointer" }}>
                 EasyUploader

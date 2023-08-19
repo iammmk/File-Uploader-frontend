@@ -9,8 +9,9 @@ import { BASE_URL } from "../services/Helper";
 import Nav from "./Nav";
 import Utils from "../utils/Utils";
 
+// Component to display details of a selected file and allows downloading
 const FileViewer = () => {
-  const { shortId } = useParams();
+  const { shortId } = useParams(); // Retrieve shortId from URL parameters
   const [file, setFile] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const [alertDetails, setAlertDetails] = useState({
@@ -25,6 +26,7 @@ const FileViewer = () => {
     }, 4000);
   };
 
+  // Function to fetch file details
   const getFile = async () => {
     try {
       setLoading(true);
@@ -37,6 +39,7 @@ const FileViewer = () => {
     }
   };
 
+  // Function to handle file download
   const onDownload = async (shortId, filename) => {
     try {
       setLoading(true);
@@ -62,17 +65,22 @@ const FileViewer = () => {
     }
   };
 
+  // Fetch the file details when the component mounts
   useEffect(() => {
     getFile();
   }, []);
 
+  // Show loader if loading
   if (isLoading) {
     return (
       <Backdrop
-        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        sx={{
+          backgroundColor: "#fff",
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+        }}
         open={isLoading}
       >
-        <CircularProgress color="inherit" />
+        <CircularProgress />
       </Backdrop>
     );
   }

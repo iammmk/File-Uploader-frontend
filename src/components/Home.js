@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  ALert,
   Backdrop,
   Button,
   Grid,
@@ -27,6 +26,7 @@ import { BASE_URL } from "../services/Helper";
 import Utils from "../utils/Utils";
 import Nav from "./Nav";
 
+// Main home component
 const Home = () => {
   const history = useNavigate();
   const [files, setFiles] = useState([]);
@@ -45,6 +45,7 @@ const Home = () => {
     }, 4000);
   };
 
+  // Function to get all files
   const getAllFiles = async () => {
     try {
       setLoading(true);
@@ -61,6 +62,7 @@ const Home = () => {
     hiddenFileInput.current.click();
   };
 
+  // Function to upload file
   const onUpload = async (event) => {
     const fileUploaded = event.target.files[0];
     if (fileUploaded) {
@@ -97,6 +99,7 @@ const Home = () => {
     }
   };
 
+  // Function to download file
   const onDownload = async (shortId, filename) => {
     try {
       setLoading(true);
@@ -122,6 +125,7 @@ const Home = () => {
     }
   };
 
+  // Function to delete file
   const onDelete = async (shortId) => {
     try {
       setLoading(true);
@@ -138,6 +142,7 @@ const Home = () => {
     }
   };
 
+  // Columns for the table
   const columns = [
     { id: "name", label: "Filename", width: "30%" },
     { id: "code", label: "Type" },
@@ -147,10 +152,12 @@ const Home = () => {
     { id: "code", label: "Actions" },
   ];
 
+  // Fetch all files on mount
   useEffect(() => {
     getAllFiles();
   }, []);
 
+  // Show loader if loading
   if (isLoading) {
     return (
       <Backdrop
@@ -270,6 +277,7 @@ const Home = () => {
             </Table>
           </TableContainer>
         </Grid>
+        {/* handle no files */}
         {!files.length && (
           <Grid container justifyContent="center" sx={{ padding: "40px" }}>
             <Grid item>
