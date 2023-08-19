@@ -6,6 +6,9 @@ https://easyuploader.netlify.app/
 
 <img width="960" alt="Screenshot 2023-08-19 234648" src="https://github.com/iammmk/File-Uploader-frontend/assets/58235282/966ee50d-9df1-47db-b85e-ac6e227231fd">
 
+<img width="960" alt="Screenshot 2023-08-20 001036" src="https://github.com/iammmk/File-Uploader-frontend/assets/58235282/c5331b4e-68c3-4567-bbc8-8fede87d9d85">
+
+
 
 ## Features
 
