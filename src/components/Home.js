@@ -32,16 +32,17 @@ const Home = () => {
   const [files, setFiles] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const hiddenFileInput = useRef(null);
+  const [openAlert, setOpenAlert] = useState(false);
   const [alertDetails, setAlertDetails] = useState({
-    open: false,
-    severity: "",
+    severity: "success",
     message: "",
   });
 
   const showAlert = (severity, message) => {
-    setAlertDetails({ ...alertDetails, severity, message, open: true });
+    setOpenAlert(true);
+    setAlertDetails({ ...alertDetails, severity, message });
     setTimeout(() => {
-      setAlertDetails({ ...alertDetails, open: false });
+      setOpenAlert(false);
     }, 4000);
   };
 
@@ -142,14 +143,20 @@ const Home = () => {
     }
   };
 
+  const onCopy = (shortId) => {
+    const url = window.location.origin + "/" + shortId;
+    navigator.clipboard.writeText(url);
+    showAlert("success", "File link copied to clipboard !");
+  };
+
   // Columns for the table
   const columns = [
     { id: "name", label: "Filename", width: "30%" },
-    { id: "code", label: "Type" },
-    { id: "code", label: "Size" },
-    { id: "code", label: "Uploaded On" },
-    { id: "code", label: "Expire On" },
-    { id: "code", label: "Actions" },
+    { id: "type", label: "Type" },
+    { id: "size", label: "Size" },
+    { id: "uploadedOn", label: "Uploaded On" },
+    { id: "expireOn", label: "Expire On" },
+    { id: "actions", label: "Actions" },
   ];
 
   // Fetch all files on mount
@@ -175,7 +182,7 @@ const Home = () => {
   return (
     <Grid>
       <Nav />
-      <AlertComp {...alertDetails} />
+      {openAlert && <AlertComp {...alertDetails} />}
       <Grid container sx={{ width: "90%", margin: "30px auto 20px" }}>
         <Grid container justifyContent="flex-end">
           <Grid item>
@@ -236,9 +243,7 @@ const Home = () => {
                           <IconButton
                             aria-label="copy"
                             onClick={() => {
-                              const url =
-                                window.location.origin + "/" + file.shortId;
-                              navigator.clipboard.writeText(url);
+                              onCopy(file.shortId);
                             }}
                           >
                             <ContentCopyIcon color="primary" />

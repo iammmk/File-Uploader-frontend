@@ -14,15 +14,16 @@ const FileViewer = () => {
   const { shortId } = useParams(); // Retrieve shortId from URL parameters
   const [file, setFile] = useState(null);
   const [isLoading, setLoading] = useState(false);
+  const [openAlert, setOpenAlert] = useState(false);
   const [alertDetails, setAlertDetails] = useState({
-    open: false,
-    severity: "",
+    severity: "success",
     message: "",
   });
   const showAlert = (severity, message) => {
-    setAlertDetails({ ...alertDetails, severity, message, open: true });
+    setOpenAlert(true);
+    setAlertDetails({ ...alertDetails, severity, message });
     setTimeout(() => {
-      setAlertDetails({ ...alertDetails, open: false });
+      setOpenAlert(false);
     }, 4000);
   };
 
@@ -88,7 +89,7 @@ const FileViewer = () => {
   return (
     <Grid>
       <Nav />
-      <AlertComp {...alertDetails} />
+      {openAlert && <AlertComp {...alertDetails} />}
       <Grid
         container
         justifyContent="center"
