@@ -1,70 +1,40 @@
-# Getting Started with Create React App
+# EasyUploader (Frontend)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+EasyUploader is a simple and efficient file upload and short link generation platform. Built with the MERN stack, it allows users to upload files and share them through short links.
 
-## Available Scripts
+https://easyuploader.netlify.app/
 
-In the project directory, you can run:
+<img width="960" alt="Screenshot 2023-08-19 234648" src="https://github.com/iammmk/File-Uploader-frontend/assets/58235282/966ee50d-9df1-47db-b85e-ac6e227231fd">
 
-### `npm start`
+<img width="960" alt="Screenshot 2023-08-20 001036" src="https://github.com/iammmk/File-Uploader-frontend/assets/58235282/c5331b4e-68c3-4567-bbc8-8fede87d9d85">
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **File Upload:** Users can easily select and upload files.
+- **Short Link Generation:** Short links are created for sharing uploaded files.
+- **Error Handling:** Proper error messages are displayed for invalid file types or size restrictions.
+- **File Download:** Uploaded files can be downloaded via the provided link.
+- **File Expiration:** Files are automatically deleted after a set period of time.
+- **Manual File Deletion:** Users have the option to delete their uploaded files.
 
-### `npm run build`
+## Technologies Used
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- React (Frontend Framework)
+- Material-UI (UI Design)
+- Axios (HTTP Client)
+- Express.js, MongoDB (Backend - in a separate repository)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone this repository: `git clone https://github.com/your-username/easyuploader-frontend.git`
 
-### `npm run eject`
+2. Navigate to the project directory: `cd easyuploader-frontend`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. Install the dependencies: `npm install`
+  
+4. Start the development server: `npm start`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+5. Open your browser and go to `http://localhost:3000`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
