@@ -235,12 +235,13 @@ const Home = () => {
                 {files.length > 0 &&
                   files
                     .filter((ele) => {
-                      if (searchTerm.trim() === "") {
+                      const trimmedSearchTerm = searchTerm.trim();
+                      if (trimmedSearchTerm === "") {
                         return true;
                       } else {
                         return ele.filename
                           .toLowerCase()
-                          .includes(searchTerm.toLowerCase());
+                          .includes(trimmedSearchTerm.toLowerCase());
                       }
                     })
                     .map((file) => (
