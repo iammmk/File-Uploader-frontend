@@ -5,12 +5,14 @@ import {
   Button,
   Grid,
   IconButton,
+  InputAdornment,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
+  TextField,
   Tooltip,
   Paper,
 } from "@mui/material";
@@ -19,6 +21,7 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DownloadIcon from "@mui/icons-material/Download";
 import LoginIcon from "@mui/icons-material/Login";
+import SearchIcon from "@mui/icons-material/Search";
 import UploadIcon from "@mui/icons-material/Upload";
 import { AlertComp } from "./AlertComp";
 import axios from "axios";
@@ -31,6 +34,7 @@ const Home = () => {
   const history = useNavigate();
   const [files, setFiles] = useState([]);
   const [isLoading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   const hiddenFileInput = useRef(null);
   const [openAlert, setOpenAlert] = useState(false);
   const [alertDetails, setAlertDetails] = useState({
@@ -130,9 +134,7 @@ const Home = () => {
   const onDelete = async (shortId) => {
     try {
       setLoading(true);
-      const response = await axios.delete(
-        `${BASE_URL}/files/delete/${shortId}`
-      );
+      await axios.delete(`${BASE_URL}/files/delete/${shortId}`);
       showAlert("success", "File deleted successfully !");
       getAllFiles();
     } catch (error) {
@@ -184,7 +186,23 @@ const Home = () => {
       <Nav />
       {openAlert && <AlertComp {...alertDetails} />}
       <Grid container sx={{ width: "90%", margin: "30px auto 20px" }}>
-        <Grid container justifyContent="flex-end">
+        <Grid container justifyContent="flex-end" alignItems="center">
+          <Grid item>
+            <TextField
+              label="Search Files"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              sx={{ width: 300, marginRight: 2 }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+              size="small"
+            />
+          </Grid>
           <Grid item>
             <Button
               variant="contained"
@@ -201,7 +219,7 @@ const Home = () => {
             />
           </Grid>
         </Grid>
-        <Grid item xs={12} sx={{ marginTop: "20px" }}>
+        <Grid item xs={12} sx={{ marginTop: "50px" }}>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
@@ -215,69 +233,81 @@ const Home = () => {
               </TableHead>
               <TableBody>
                 {files.length > 0 &&
-                  files.map((file) => (
-                    <TableRow
-                      key={file.shortId}
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row">
-                        {Utils.textEllipsis(
-                          Utils.getFilename(file.filename),
-                          35
-                        )}
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        {file.fileType}
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        {Utils.getFileSize(file.size)}
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        {Utils.getDateTime(file.uploadedOn)}
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        {Utils.getDateTime(file.expireOn)}
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        <Tooltip title="Copy Link" placement="top">
-                          <IconButton
-                            aria-label="copy"
-                            onClick={() => {
-                              onCopy(file.shortId);
-                            }}
-                          >
-                            <ContentCopyIcon color="primary" />
-                          </IconButton>
-                        </Tooltip>
-                        <Tooltip title="Visit" placement="top">
-                          <IconButton
-                            aria-label="visit-file"
-                            onClick={() => history(`/${file.shortId}`)}
-                          >
-                            <LoginIcon color="secondary" />
-                          </IconButton>
-                        </Tooltip>
-                        <Tooltip title="Download" placement="top">
-                          <IconButton
-                            aria-label="download"
-                            onClick={() =>
-                              onDownload(file.shortId, file.filename)
-                            }
-                          >
-                            <DownloadIcon color="success" />
-                          </IconButton>
-                        </Tooltip>
-                        <Tooltip title="Delete" placement="top">
-                          <IconButton
-                            aria-label="delete"
-                            onClick={() => onDelete(file.shortId)}
-                          >
-                            <DeleteIcon color="error" />
-                          </IconButton>
-                        </Tooltip>
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                  files
+                    .filter((ele) => {
+                      if (searchTerm.trim() === "") {
+                        return true;
+                      } else {
+                        return ele.filename
+                          .toLowerCase()
+                          .includes(searchTerm.toLowerCase());
+                      }
+                    })
+                    .map((file) => (
+                      <TableRow
+                        key={file.shortId}
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
+                      >
+                        <TableCell component="th" scope="row">
+                          {Utils.textEllipsis(
+                            Utils.getFilename(file.filename),
+                            35
+                          )}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          {file.fileType}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          {Utils.getFileSize(file.size)}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          {Utils.getDateTime(file.uploadedOn)}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          {Utils.getDateTime(file.expireOn)}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          <Tooltip title="Copy Link" placement="top">
+                            <IconButton
+                              aria-label="copy"
+                              onClick={() => {
+                                onCopy(file.shortId);
+                              }}
+                            >
+                              <ContentCopyIcon color="primary" />
+                            </IconButton>
+                          </Tooltip>
+                          <Tooltip title="Visit" placement="top">
+                            <IconButton
+                              aria-label="visit-file"
+                              onClick={() => history(`/${file.shortId}`)}
+                            >
+                              <LoginIcon color="secondary" />
+                            </IconButton>
+                          </Tooltip>
+                          <Tooltip title="Download" placement="top">
+                            <IconButton
+                              aria-label="download"
+                              onClick={() =>
+                                onDownload(file.shortId, file.filename)
+                              }
+                            >
+                              <DownloadIcon color="success" />
+                            </IconButton>
+                          </Tooltip>
+                          <Tooltip title="Delete" placement="top">
+                            <IconButton
+                              aria-label="delete"
+                              onClick={() => onDelete(file.shortId)}
+                            >
+                              <DeleteIcon color="error" />
+                            </IconButton>
+                          </Tooltip>
+                        </TableCell>
+                      </TableRow>
+                    ))}
               </TableBody>
             </Table>
           </TableContainer>
