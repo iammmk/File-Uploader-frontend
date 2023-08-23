@@ -185,7 +185,7 @@ const Home = () => {
     <Grid>
       <Nav />
       {openAlert && <AlertComp {...alertDetails} />}
-      <Grid container sx={{ width: "90%", margin: "30px auto 20px" }}>
+      <Grid container sx={{ width: "95%", margin: "30px auto 20px" }}>
         <Grid container justifyContent="flex-end" alignItems="center">
           <Grid item>
             <TextField
