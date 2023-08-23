@@ -4,7 +4,8 @@ EasyUploader is a simple and efficient file upload and short link generation pla
 
 https://easyuploader.netlify.app/
 
-<img width="960" alt="Screenshot 2023-08-21 133319" src="https://github.com/iammmk/File-Uploader-frontend/assets/58235282/eb0fa3fd-7138-40d5-8070-b1a1c207397b">
+<img width="960" alt="Screenshot 2023-08-23 115555" src="https://github.com/iammmk/File-Uploader-frontend/assets/58235282/196646ee-1e73-45ae-9ccf-74d839290345">
+
 
 
 <img width="960" alt="Screenshot 2023-08-20 001036" src="https://github.com/iammmk/File-Uploader-frontend/assets/58235282/c5331b4e-68c3-4567-bbc8-8fede87d9d85">
